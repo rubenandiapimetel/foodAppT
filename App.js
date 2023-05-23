@@ -12,7 +12,7 @@ export default function App() {
 
   const [request, response, promptAsync] = Google.useAuthRequest({
     webClientId: "699940751267-7ke8t36g5m7mj5jmr8k2d2jk3ig322us.apps.googleusercontent.com",
-    androidClientId: "699940751267-bvvam47fapml8ek1g7dba3poq1lllbva.apps.googleusercontent.com"
+    androidClientId: "699940751267-bvvam47fapml8ek1g7dba3poq1lllbva.apps.googleusercontent.com",
   });
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function App() {
             Verified: {userInfo.verified_email ? "yes" : "no"}
           </Text>
           <Text style={styles.text}>Name: {userInfo.name}</Text>
-          {/* <Text style={styles.text}>{JSON.stringify(userInfo, null, 2)}</Text> */}
+          <Text style={styles.text}>{JSON.stringify(userInfo, null, 2)}</Text>
         </View>
       )}
       <Button
