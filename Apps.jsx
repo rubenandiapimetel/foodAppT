@@ -9,7 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 WebBrowser.maybeCompleteAuthSession();
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
 	const [token, setToken] = useState("");
   const [userInfo, setUserInfo] = useState(null);
 

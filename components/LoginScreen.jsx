@@ -1,22 +1,23 @@
+import React from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Button } from 'react-native';
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Button, Image } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
 WebBrowser.maybeCompleteAuthSession();
 
-export default function LoginScreen({ navigation }) {
-  const [token, setToken] = useState("");
+const LoginScreen = ({ navigation }) => {
+	const [token, setToken] = useState("");
   const [userInfo, setUserInfo] = useState(null);
 
   const [request, response, promptAsync] = Google.useAuthRequest({
-    webClientId:
-      "699940751267-7ke8t36g5m7mj5jmr8k2d2jk3ig322us.apps.googleusercontent.com",
-    androidClientId:
-      "699940751267-bvvam47fapml8ek1g7dba3poq1lllbva.apps.googleusercontent.com",
+    webClientId: "699940751267-7ke8t36g5m7mj5jmr8k2d2jk3ig322us.apps.googleusercontent.com",
+    androidClientId: "699940751267-bvvam47fapml8ek1g7dba3poq1lllbva.apps.googleusercontent.com",
   });
 
+  
   useEffect(() => {
     handleEffect();
   }, [response, token]);
@@ -59,60 +60,73 @@ export default function LoginScreen({ navigation }) {
     }
   };
 
+  const handleGoogleLogin = () => {
+    // Lógica para iniciar sesión con Google
+  };
+
   return (
     <View style={styles.container}>
-      {!userInfo ? (
-        <Button
-          title="Sign in with Google"
-          disabled={!request}
-          onPress={() => {
-            promptAsync();
-          }}
-        />
-      ) : (
-        <View style={styles.card}>
-          {userInfo?.picture && (
-            <Image source={{ uri: userInfo?.picture }} style={styles.image} />
-          )}
-          <Text style={styles.text}>Email: {userInfo.email}</Text>
-          <Text style={styles.text}>
-            Verified: {userInfo.verified_email ? "yes" : "no"}
-          </Text>
-          <Text style={styles.text}>Name: {userInfo.name}</Text>
-          <Text style={styles.text}>{JSON.stringify(userInfo, null, 2)}</Text>
-        </View>
-      )}
-      <Button
-        title="remove local store"
-        onPress={async () => await AsyncStorage.removeItem("@user")}
+      <Image
+        source={require('../src/logo.png')}
+        style={styles.logo}
       />
+      <Text style={styles.title}>Inicia sesión con Google</Text>
+      <TouchableOpacity style={styles.button} onPress={() => {
+            promptAsync();
+          }}>
+        <Image
+          source={require('../src/google_icon.png')}
+          style={styles.buttonIcon}
+        />
+        <Text style={styles.buttonText}>Continuar con Google</Text>
+      </TouchableOpacity>
+      <Text style={styles.footerText}>© 2023 Foody. Todos los derechos reservados.</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 30,
   },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
+  logo: {
+    width: 150,
+    height: 150,
+    marginBottom: 40,
   },
-  card: {
-    borderWidth: 1,
-    borderRadius: 15,
-    padding: 15,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
-  image: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#4285F4',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    marginBottom: 20,
+  },
+  buttonIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  footerText: {
+    fontSize: 12,
+    color: '#999',
+    marginTop: 20,
   },
 });
 
-/* webClientId: "699940751267-7ke8t36g5m7mj5jmr8k2d2jk3ig322us.apps.googleusercontent.com",
-androidClientId: "699940751267-bvvam47fapml8ek1g7dba3poq1lllbva.apps.googleusercontent.com",
-redirectUri: "https://auth.expo.io/@jokalsx/foodyAppT", */
+export default LoginScreen;
