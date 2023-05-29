@@ -1,7 +1,6 @@
-
-import React, { useState } from 'react';
-import { SearchBar } from '@rneui/themed';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import { SearchBar } from "@rneui/themed";
+import { View, Text, StyleSheet } from "react-native";
 
 const SearchBarComponent = () => {
   const [search, setSearch] = useState("");
@@ -24,8 +23,8 @@ const SearchBarComponent = () => {
 const styles = StyleSheet.create({
   view: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
