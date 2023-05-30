@@ -41,9 +41,11 @@ export default function LoginScreen() {
         navigation.navigate("Home");
       }
     } else {
+      if (response?.type === "success"){
       setUserInfo(user);
       console.log("loaded locally");
       navigation.navigate("Home");
+      }
     }
   }
 
@@ -69,10 +71,6 @@ export default function LoginScreen() {
     } catch (error) {
       // Add your own error handler here
     }
-  };
-
-  const handleGoogleLogin = () => {
-    // Lógica para iniciar sesión con Google
   };
 
   return (

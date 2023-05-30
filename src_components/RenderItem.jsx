@@ -14,7 +14,7 @@ const RenderItem = () => {
       { id: 3, image: require('../src/food_images/3.jpg'), description: 'Descripción 3', smallDescription: 'Descripción pequeña 3' },
       { id: 4, image: require('../src/food_images/4.jpg'), description: 'Descripción 4', smallDescription: 'Descripción pequeña 4' },
       { id: 5, image: require('../src/food_images/3.jpg'), description: 'Descripción 5', smallDescription: 'Descripción pequeña 5' },
-      { id: 6, image: require('../src/food_images/4.jpg'), description: 'Descripción 6', smallDescription: 'Descripción pequeña 6' },
+      { id: 6, image: require('../src/food_images/3.jpg'), description: 'Descripción 6', smallDescription: 'Descripción pequeña 6' },
       // ...
     ];
     setData(dummyData);
@@ -49,23 +49,23 @@ const RenderItem = () => {
         </View>
         <View style={styles.bottomBar}>
           <View style={styles.iconContainer}>
-            <Image source={require('../src/icons/inicio.png')} style={styles.icon} />
+            <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
             <Text style={styles.iconText}>Inicio</Text>
           </View>
           <View style={styles.iconContainer}>
-            <Image source={require('../src/icons/favoritos.png')} style={styles.icon} />
+            <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
             <Text style={styles.iconText}>Favoritos</Text>
           </View>
           <View style={styles.iconContainer}>
-            <Image source={require('../src/icons/compartelo.png')} style={styles.icon} />
+            <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
             <Text style={styles.iconText}>Compartelo</Text>
           </View>
           <View style={styles.iconContainer}>
-            <Image source={require('../src/icons/mensajes.png')} style={styles.icon} />
+            <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
             <Text style={styles.iconText}>Mensajes</Text>
           </View>
           <View style={styles.iconContainer}>
-            <Image source={require('../src/icons/mi_cuenta.png')} style={styles.icon} />
+            <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
             <Text style={styles.iconText}>Mi Cuenta</Text>
           </View>
         </View>
