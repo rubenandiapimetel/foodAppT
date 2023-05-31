@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "foodyAppT",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -18,6 +19,11 @@
       "supportsTablet": true
     },
     "android": {
+      "config": {
+        "googleSignIn": {
+          "expoClientId": "699940751267-7ke8t36g5m7mj5jmr8k2d2jk3ig322us.apps.googleusercontent.com"
+        }
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

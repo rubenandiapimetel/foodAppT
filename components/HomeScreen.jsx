@@ -6,7 +6,6 @@ const HomeScreen = () => {
 
   return (
     <View>
-    {/* <SearchBarComponent/> */}
     <RenderItem/>
     </View>
   );

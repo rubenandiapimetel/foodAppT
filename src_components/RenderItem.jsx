@@ -21,13 +21,6 @@ const RenderItem = () => {
   }, []);
 
   // Función para renderizar cada elemento de la lista
-  const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <Image source={item.image} style={styles.image} />
-      <Text style={styles.description}>{item.description}</Text>
-      <Text style={styles.smallDescription}>{item.smallDescription}</Text>
-    </View>
-  );
 
   return (
     <View style={styles.container}>
@@ -35,7 +28,7 @@ const RenderItem = () => {
         style={styles.searchBar}
         value={searchText}
         onChangeText={text => setSearchText(text)}
-        placeholder="Buscar"
+        placeholder="Buscaar"
       />
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.listContainer}>
