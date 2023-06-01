@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TextInput, ScrollView, Image, Text } from 'react-native';
+import { StyleSheet, View, TextInput, ScrollView, Image, Text, TouchableOpacity, SafeAreaView} from 'react-native';
 
 const RenderItem = () => {
   const [searchText, setSearchText] = useState('');
@@ -23,12 +23,12 @@ const RenderItem = () => {
   // Función para renderizar cada elemento de la lista
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TextInput
         style={styles.searchBar}
         value={searchText}
         onChangeText={text => setSearchText(text)}
-        placeholder="Buscaar"
+        placeholder="Buscar"
       />
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.listContainer}>
@@ -40,30 +40,30 @@ const RenderItem = () => {
             </View>
           ))}
         </View>
-        <View style={styles.bottomBar}>
-          <View style={styles.iconContainer}>
-            <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
-            <Text style={styles.iconText}>Inicio</Text>
-          </View>
-          <View style={styles.iconContainer}>
-            <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
-            <Text style={styles.iconText}>Favoritos</Text>
-          </View>
-          <View style={styles.iconContainer}>
-            <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
-            <Text style={styles.iconText}>Compartelo</Text>
-          </View>
-          <View style={styles.iconContainer}>
-            <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
-            <Text style={styles.iconText}>Mensajes</Text>
-          </View>
-          <View style={styles.iconContainer}>
-            <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
-            <Text style={styles.iconText}>Mi Cuenta</Text>
-          </View>
-        </View>
       </ScrollView>
-    </View>
+      <View style={styles.bottomBar}>
+        <TouchableOpacity style={styles.iconContainer}>
+          <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
+          <Text style={styles.iconText}>Inicio</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.iconContainer}>
+          <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
+          <Text style={styles.iconText}>Favoritos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.iconContainer}>
+          <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
+          <Text style={styles.iconText}>Compártelo</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.iconContainer}>
+          <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
+          <Text style={styles.iconText}>Mensajes</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.iconContainer}>
+          <Image source={require('../src/food_images/4.jpg')} style={styles.icon} />
+          <Text style={styles.iconText}>Cuenta</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -83,13 +83,14 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
+    paddingBottom: 60, // Asegura que el contenido no se solape con la barra inferior
   },
   listContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
-    marginBottom: 60,
+    marginBottom: 20,
   },
   itemContainer: {
     width: '48%',
