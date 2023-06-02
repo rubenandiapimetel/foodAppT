@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar, StyleSheet, View, TextInput, ScrollView, Image, Text, TouchableOpacity, SafeAreaView} from 'react-native';
+import { StatusBar, StyleSheet, View, TextInput, ScrollView, Image, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { KeyboardAvoidingView, Platform } from 'react-native';
-import ButtomBar from './ButtomBar';
+import ButtomBar from '../src_components/ButtomBar';
 
-
-const RenderItem = () => {
+const RenderAddedItem = () => {
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState([]);
 
@@ -24,36 +23,44 @@ const RenderItem = () => {
     setData(dummyData);
   }, []);
 
-  // Función para renderizar cada elemento de la lista
+  const handleItemClick = (item) => {
+    // Lógica para manejar el clic en la imagen
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-     {/*  <StatusBar barStyle="dark-content" /> */}
-    <KeyboardAvoidingView
-    style={styles.container}
-    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 25}
-  >
-      <TextInput
-        style={styles.searchBar}
-        value={searchText}
-        onChangeText={text => setSearchText(text)}
-        placeholder="Buscar"
-      />
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        <View style={styles.listContainer}>
-          {data.map(item => (
-            <View style={styles.itemContainer} key={item.id}>
-              <Image source={item.image} style={styles.image} />
-              <Text style={styles.description}>{item.description}</Text>
-              <Text style={styles.smallDescription}>{item.smallDescription}</Text>
-            </View>
-          ))}
-        </View>
-      </ScrollView>
-          <ButtomBar/>
+      <StatusBar barStyle="dark-content" />
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 25}
+      >
+        <TextInput
+          style={styles.searchBar}
+          value={searchText}
+          onChangeText={text => setSearchText(text)}
+          placeholder="Buscar"
+        />
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+          <View style={styles.listContainer}>
+            {data.map((item, index) => (
+              <TouchableOpacity
+                style={styles.itemContainer}
+                key={item.id}
+                onPress={() => handleItemClick(item)}
+              >
+                <Image source={item.image} style={styles.image} />
+                <View style={styles.descriptionContainer}>
+                  <Text style={styles.description}>{item.description}</Text>
+                  <Text style={styles.smallDescription}>{item.smallDescription}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </ScrollView>
+        <ButtomBar/>
       </KeyboardAvoidingView>
-      </SafeAreaView>
+    </SafeAreaView>
   );
 };
 
@@ -83,14 +90,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   itemContainer: {
-    width: '48%',
+    width: '33.33%',
     alignItems: 'center',
     marginBottom: 20,
   },
   image: {
-    width: 150,
+    width: '100%',
     height: 150,
     borderRadius: 10,
+  },
+  descriptionContainer: {
+    alignItems: 'center',
   },
   description: {
     fontSize: 16,
@@ -131,4 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RenderItem;
+export default RenderAddedItem;
