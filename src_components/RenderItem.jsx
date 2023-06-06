@@ -5,7 +5,7 @@ import { KeyboardAvoidingView, Platform } from 'react-native';
 import ButtomBar from './ButtomBar';
 
 
-const RenderItem = () => {
+const RenderItem = () => { 
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState([]);
 
@@ -28,7 +28,7 @@ const RenderItem = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-     {/*  <StatusBar barStyle="dark-content" /> */}
+    <StatusBar barStyle="light-content" />
     <KeyboardAvoidingView
     style={styles.container}
     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

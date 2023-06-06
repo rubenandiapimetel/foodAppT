@@ -29,7 +29,7 @@ const RenderAddedItem = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" />
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   itemContainer: {
-    width: '33.33%',
+    width: '100%',
     alignItems: 'center',
     marginBottom: 20,
   },

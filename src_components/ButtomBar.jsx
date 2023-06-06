@@ -8,7 +8,7 @@ export default BottomBar = () =>{
   return(
 
 <View style={styles.bottomBar}>
-        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.navigate('')}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.navigate('Home')}>
         <Icon name="restaurant" size={24} />
           <Text style={styles.iconText}>Inicio</Text>
         </TouchableOpacity>
@@ -16,11 +16,11 @@ export default BottomBar = () =>{
         <Icon name="favorite-border" size={24} />
           <Text style={styles.iconText}>Favoritos</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.navigate('Upload')}>
         <Icon name="add" size={24} />
           <Text style={styles.iconText}>Compártelo</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.navigate('Upload')}>
         <Icon name="chat" size={24} />
           <Text style={styles.iconText}>Chat</Text>
         </TouchableOpacity>
