@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView} from 'react-nat
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from "@react-navigation/native";
 
-export default BottomBar = () =>{
+export default function BottomBar () {
   const navigation = useNavigation();
   return(
 
@@ -20,7 +20,7 @@ export default BottomBar = () =>{
         <Icon name="add" size={24} />
           <Text style={styles.iconText}>Compártelo</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.navigate('Upload')}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.navigate('')}>
         <Icon name="chat" size={24} />
           <Text style={styles.iconText}>Chat</Text>
         </TouchableOpacity>

@@ -67,6 +67,7 @@ const UploadFoodComponent = () => {
     <SafeAreaView style={{flex : 1}}>
       <StatusBar barStyle="light-content" />
     <View style={{ flex: 1, padding: 20 }}>
+      
       <Text style={{ fontSize: 18, marginBottom: 10 }}>Subelo</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
         <TouchableOpacity onPress={pickImageFromCamera}>
@@ -112,18 +113,15 @@ const UploadFoodComponent = () => {
       </View>
 
       <Text style={{ fontSize: 18 }}>Te encontrarán en</Text>
-      <TouchableOpacity onPress={getLocation}>
-      <View style={styles.container}>
+          <TextInput
+        style={{ borderWidth: 1, borderColor: '#ccc', padding: 10, marginBottom: 10 }}
+        value={description}
+        onChangeText={setDescription}
+      />
+          <View style={styles.container}>
       <MapView style={styles.map} />
     </View>
-      </TouchableOpacity>
-      {location && (
-        <TextInput
-          style={{ borderWidth: 1, borderColor: '#ccc', padding: 10, marginTop: 10 }}
-          placeholder="Introduce calle y número"
-          // Aquí puedes utilizar alguna librería de autocompletado de direcciones, como react-native-google-places-autocomplete
-        />
-      )}
+
 
       <Button title="Subir" onPress={handleUpload} />
       <ButtomBar/>
@@ -138,7 +136,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: '100%',
-    height: '100%',
+    height: '90%',
   }
 });
 
