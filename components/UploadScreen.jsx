@@ -4,7 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
 import { Ionicons } from '@expo/vector-icons';
 import ButtomBar from '../src_components/ButtomBar';
-import MapView from 'react-native-maps';
+import LocationAutocompleteComponent from '../src_components/LocationAutocompleteComponent';
 
 const UploadFoodComponent = () => {
   const [foodImage, setFoodImage] = useState(null);
@@ -119,7 +119,7 @@ const UploadFoodComponent = () => {
         onChangeText={setDescription}
       />
           <View style={styles.container}>
-      <MapView style={styles.map} />
+      <LocationAutocompleteComponent></LocationAutocompleteComponent>
     </View>
 
 

@@ -17,8 +17,8 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="Home" component={HomeScreen}options={{ headerShown: false }}/>
         <Stack.Screen name="Added" component={FavoritesScreen}options={{ headerShown: false }}/>
-        {/* <Stack.Screen name="Upload" component={UploadScreen} options={{ headerShown: false }}/> */}
-        <Stack.Screen name="Upload" component={LocationAutocompleteComponent} options={{ headerShown: false }}/>
+        <Stack.Screen name="Upload" component={UploadScreen} options={{ headerShown: false }}/>
+        {/* <Stack.Screen name="Upload" component={LocationAutocompleteComponent} options={{ headerShown: false }}/> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
