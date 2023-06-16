@@ -5,7 +5,6 @@ import LoginScreen from "./components/LoginScreen";
 import HomeScreen from './components/HomeScreen';
 import FavoritesScreen from './components/FavoritesScreen';
 import UploadScreen from './components/UploadScreen';
-import LocationAutocompleteComponent from './components/tempk';
 
 
 const Stack = createStackNavigator();

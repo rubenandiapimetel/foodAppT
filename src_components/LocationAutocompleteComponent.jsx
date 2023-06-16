@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, TextInput } from 'react-native';
+import { SafeAreaView, KeyboardAvoidingView, View, TextInput } from 'react-native';
 import { Marker } from 'react-native-maps';
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import * as Location from 'expo-location';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
 
 const LocationAutocompleteComponent = () => {
   const [locatione, setLocatione] = useState(null); 
@@ -34,9 +35,14 @@ const LocationAutocompleteComponent = () => {
           // Aquí puedes implementar la lógica para obtener los detalles de la ubicación seleccionada
           // Utilizando los datos proporcionados por la API de Google Places Autocomplete
 
-          const latitude = detail.geometry.location.lat;
-          const longitude = detail.geometry.location.lng;
-          setLocatione({ latitude, longitude });
+          const {lat,lng} = detail.geometry.location; 
+          setLocatione(prevLocatione => ({
+            ...prevLocatione,
+            latitude: lat,
+            longitude: lng
+          }));
+          //ESTA ES LA MANERA CORRECTA DE HACERLO CON SPREADS Y DESECTRUCTURING YA QUE 
+          //HE TENIDO UN ERROR GARRAFAL AL PENSAR QUE DEVOLVIAN LATITUDE Y LONGITUDE EN VEZ DE LAT Y LNG
           
         }}
         query={{
