@@ -5,6 +5,7 @@ import LoginScreen from "./components/LoginScreen";
 import HomeScreen from './components/HomeScreen';
 import FavoritesScreen from './components/FavoritesScreen';
 import UploadScreen from './components/UploadScreen';
+import UploadFood from './components/temp';
 
 
 const Stack = createStackNavigator();
@@ -17,7 +18,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen}options={{ headerShown: false }}/>
         <Stack.Screen name="Added" component={FavoritesScreen}options={{ headerShown: false }}/>
         <Stack.Screen name="Upload" component={UploadScreen} options={{ headerShown: false }}/>
-        {/* <Stack.Screen name="Upload" component={LocationAutocompleteComponent} options={{ headerShown: false }}/> */}
+        {/* <Stack.Screen name="Upload" component={UploadFood} options={{ headerShown: false }}/> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

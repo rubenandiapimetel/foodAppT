@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {  StyleSheet,
+import {
+  StyleSheet,
   StatusBar,
   KeyboardAvoidingView,
   SafeAreaView,
@@ -11,7 +12,8 @@ import {  StyleSheet,
   TouchableOpacity,
   Alert,
   Modal,
-  TouchableWithoutFeedback,} from 'react-native';
+  TouchableWithoutFeedback,
+} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
 import { Ionicons } from '@expo/vector-icons';
@@ -19,38 +21,34 @@ import ButtomBar from '../src_components/ButtomBar';
 import { Marker } from 'react-native-maps';
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 const UploadFoodComponent = () => {
   const [foodImage, setFoodImage] = useState(null);
   const [foodName, setFoodName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
-  const [locatione, setLocatione] = useState(null); 
+  const [locatione, setLocatione] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const placesAutocompleteRef = useRef()
+  const [adress, setAdress] = useState(null);
   useEffect(() => {
     getLocation();
   }, []);
-  useEffect(() => {
-    if (modalVisible) {
-      placesAutocompleteRef.current?.focus(); // Enfocar en el componente GooglePlacesAutocomplete
-    }
-  }, [modalVisible]);
   const getLocation = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
+    if (status !== 'granted') { 
       console.log('Permission denied');
       return;
     }
     console.log('Permission accpet');
     const locationResult = await Location.getCurrentPositionAsync({});
-    const { latitude, longitude } = locationResult.coords; 
+    const { latitude, longitude } = locationResult.coords;
 
     setLocatione({ latitude, longitude });
   };
   const pickImageFromCamera = async () => {
-    
+
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
     if (status !== 'granted') {
       Alert.alert('Permisos denegados', 'Se requieren permisos para acceder a la cámara.');
@@ -91,121 +89,126 @@ const UploadFoodComponent = () => {
     setModalVisible(true);
   };
   return (
-    
-    <SafeAreaView style={{flex : 1}}>
+
+    <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle="light-content" />
-    <View style={{ flex: 1, padding: 20 }}>
-      
-      <Text style={{ fontSize: 18, marginBottom: 10 }}>Subelo</Text>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
-        <TouchableOpacity onPress={pickImageFromCamera}>
-          <Image source={require('../src/google_icon.png')} style={{ width: 50, height: 50 }} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={pickImageFromGallery}>
-          <Image source={require('../src/google_icon.png')} style={{ width: 50, height: 50 }} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={pickImageFromCamera}>
-          <Image source={require('../src/google_icon.png')} style={{ width: 50, height: 50 }} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={pickImageFromGallery}>
-          <Image source={require('../src/google_icon.png')} style={{ width: 50, height: 50 }} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={pickImageFromCamera}>
-          <Image source={require('../src/google_icon.png')} style={{ width: 50, height: 50 }} />
-        </TouchableOpacity>
-      </View>
+      <View style={{ flex: 1, padding: 20 }}>
 
-      <Text style={{ fontSize: 18, marginTop: 20 }}>Que has cocinado?</Text>
-      <TextInput
-        style={styles.input}
-        value={foodName}
-        onChangeText={setFoodName}
-      />
+        <Text style={{ fontSize: 18, marginBottom: 10 }}>Sube fotos de tu plato</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20, marginTop:20 }}>
+          <TouchableOpacity onPress={pickImageFromCamera}>
+            <AntDesign name="upload" size={30}/>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={pickImageFromGallery}>
+          <AntDesign name="upload" size={30} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={pickImageFromCamera}>
+          <AntDesign name="upload" size={30} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={pickImageFromGallery}>
+          <AntDesign name="upload" size={30} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={pickImageFromCamera}>
+          <AntDesign name="upload" size={30} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={pickImageFromGallery}>
+          <AntDesign name="upload" size={30} />
+          </TouchableOpacity>
+        </View>
 
-      <Text style={{ fontSize: 18 }}>Añade descripción</Text>
-      <TextInput
-        style={styles.input}
-        value={description}
-        onChangeText={setDescription}
-      />
-
-      <Text style={{ fontSize: 18 }}>Precio</Text>
+        <Text style={{ fontSize: 18, marginTop: 20 }}>¿Que has cocinado hoy?</Text>
         <TextInput
           style={styles.input}
+          value={foodName}
+          onChangeText={setFoodName}
+        />
+
+        <Text style={{ fontSize: 18 }}>Añade una descripción del plato</Text>
+        <TextInput
+          style={styles.inputDescrip}
+          value={description}
+          multiline={true}  
+          onChangeText={setDescription}
+        />
+
+        <Text style={{ fontSize: 18,  marginRight: 10 }} >Precio</Text>
+        <TextInput
+          style={styles.inputPrice}
           value={price}
+          placeholder = { price ? price : "€"}
           onChangeText={setPrice}
           keyboardType="numeric"
         />
-        <Text style={{ fontSize: 20, marginLeft: 10 }}>€</Text>
-      <Text style={{ fontSize: 18, marginBottom: 10, }}>Te encontrarán en</Text>
-      <View style={styles.inputContainer}>
-  <TouchableWithoutFeedback onPress={openModal}>
-    <View>
-      <TextInput
-        style={styles.input}
-        placeholder="Selecciona una ubicación"
-        editable={false} // Desactiva la edición del TextInput
-      />
-    </View>
-  </TouchableWithoutFeedback>
-      </View>
-          <View style={styles.container}>
+
+        <Text style={{ fontSize: 18, marginBottom: 10, }}>Te encontrarán en</Text>
+        <View >
+          <TouchableWithoutFeedback onPress={openModal}>
+            <View>
+              <TextInput
+                style={styles.input}
+                placeholder={ adress ? adress : "Selecciona una ubicación"}
+                editable={false} // Desactiva la edición del TextInput
+              />
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
+        <View style={styles.container}>
           <MapView
-        style={styles.map}
-        region={locatione ? { ...locatione, latitudeDelta: 0.0922, longitudeDelta: 0.0421 } : null}
-        provider={PROVIDER_GOOGLE}
-      >
-        {locatione && <Marker coordinate={locatione} />}
-       { console.log(locatione)}
-      </MapView>
-    
-      <Button style={{  padding: 40, }} title="Subir" onPress={handleUpload} />
-      </View>
-      <ButtomBar/>
-      
-      </View>
-            
-      <Modal visible={modalVisible} transparent={true} animationType="slide" onRequestClose={() => setModalVisible(false)}>
-  <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-    <View style={styles.modalBackground}>
-      <KeyboardAvoidingView style={styles.modalContainer} behavior="padding">
-        <View style={styles.modalContent}>
-          <MapView
-            style={styles.mapModal}
+            style={styles.map}
             region={locatione ? { ...locatione, latitudeDelta: 0.0922, longitudeDelta: 0.0421 } : null}
             provider={PROVIDER_GOOGLE}
           >
             {locatione && <Marker coordinate={locatione} />}
+            {console.log(locatione)}
           </MapView>
-          <View style={styles.inputContainer}>
-            <GooglePlacesAutocomplete
-              ref={placesAutocompleteRef}
-              placeholder="Search"
-              fetchDetails={true}
-              onPress={(data, detail) => {
-                const { lat, lng } = detail.geometry.location;
-                setLocatione((prevLocatione) => ({
-                  ...prevLocatione,
-                  latitude: lat,
-                  longitude: lng,
-                }));
-                setModalVisible(false);
-              }}
-              query={{
-                key: "AIzaSyD6HhMnlXP9bMFzQHTbvuQZ_3aJ7Reu6tY",
-                language: 'en',
-                region: 'es'
-              }}
-            />
-            <TouchableOpacity style={styles.applyButton} onPress={() => setModalVisible(false)}>
-              <Text style={styles.applyButtonText}>Aplicar</Text>
-            </TouchableOpacity>
-          </View>
+
+          <Button style={{ padding: 40, }} title="Subir" onPress={handleUpload} />
         </View>
-      </KeyboardAvoidingView>
-    </View>
-  </TouchableWithoutFeedback>
-</Modal>
+        <ButtomBar />
+
+      </View>
+
+      <Modal visible={modalVisible} transparent={true} animationType="slide" onRequestClose={() => setModalVisible(false)}>
+        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+          <KeyboardAvoidingView style={styles.modalContainer} >
+            <View style={styles.modalBackground}>
+              <View style={styles.modalContent}>
+                  <GooglePlacesAutocomplete style = {styles.googlePlacesAutocomplete}
+                    placeholder={ adress ? adress : "Selecciona una ubicación"}
+                    fetchDetails={true}
+                    onPress={(data, detail) => {
+                      const { lat, lng } = detail.geometry.location;
+                      setLocatione((prevLocatione) => ({
+                        ...prevLocatione,
+                        latitude: lat,
+                        longitude: lng,
+                      }));
+                      setAdress(data.description);
+                      {console.log(data,detail)} //logs para ver la ubicacion
+                    }}
+                    query={{
+                      key: "AIzaSyD6HhMnlXP9bMFzQHTbvuQZ_3aJ7Reu6tY",
+                      language: 'en',
+                      region: 'es'
+                    }}
+                  />
+                  <TouchableOpacity style={styles.applyButton} onPress={() => setModalVisible(false)}>
+                    <Text style={styles.applyButtonText}>Aplicar</Text>
+                  </TouchableOpacity>
+              
+                <MapView
+                  style={styles.mapModal}
+                  region={locatione ? { ...locatione, latitudeDelta: 0.0922, longitudeDelta: 0.0421 } : null}
+                  provider={PROVIDER_GOOGLE}
+                >
+                  {locatione && <Marker coordinate={locatione} />}
+                </MapView>
+
+              </View>
+            </View>
+          </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
+      </Modal>
 
     </SafeAreaView>
   );
@@ -229,19 +232,45 @@ const styles = StyleSheet.create({
     fontSize: 16,
     backgroundColor: '#ffff',
   },
+  inputPrice: {
+    marginTop: 5,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 6,
+    marginBottom: 10,
+    borderRadius: 5,
+    fontSize: 16,
+    backgroundColor: '#ffff',
+    width: 5 *16
+  },
+  inputDescrip: {
+    marginTop: 5,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 6,
+    marginBottom: 10,
+    borderRadius: 5,
+    fontSize: 16,
+    backgroundColor: '#ffff',
+    height: 10 * 16, // Ajusta el número de filas multiplicando el tamaño de fuente
+    textAlignVertical: 'top', // Alinea el texto en la parte superior del inputtextAlign: 
+  },
   modalContainer: {
     flex: 1,
+    width: '100%',
+    height: '100%',
   },
   modalContent: {
     backgroundColor: '#fff',
     borderRadius: 10,
     padding: 20,
-    width: '80%',
+    flex: 1,
+
   },
   modalBackground: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
   modalContent: {
     backgroundColor: '#FFF',
@@ -252,10 +281,13 @@ const styles = StyleSheet.create({
     paddingBottom: 32,
   },
   mapModal: {
-    height: 200,
+    height: "90%",
+    width:"100%",
+    zIndex: -1,
   },
   inputContainer: {
     marginTop: 16,
+    flex: 1,
   },
   applyButton: {
     alignSelf: 'flex-end',
@@ -264,10 +296,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#2ecc71',
     borderRadius: 8,
     marginTop: 8,
+    marginBottom: 8,
   },
   applyButtonText: {
     color: '#FFF',
     fontWeight: 'bold',
+  },
+  googlePlacesAutocomplete: {
+    position: 'absolute',
+    zIndex: 1,
   },
 });
 

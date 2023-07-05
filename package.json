@@ -38,7 +38,11 @@
     "undefined": "react-native-google-places-autocomplete\\"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "babel-eslint": "^10.1.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8"
   },
   "private": true
 }
